@@ -5,19 +5,13 @@
         <a v-for="a in 메뉴들" :key="a">{{ a }}</a>
     </div>
 
-  <Discount/>
+  <Discount />
 
   <!-- 모달창 -->
-  <Modal/>
-
+  <Modal @closeModal="모달창열렸니=false" :원룸들="원룸들" :누른거="누른거" v-if="모달창열렸니" />
 
   <!-- 로고 및 내용 -->
-  <img alt="Vue logo" src="./assets/logo.png">
-  <div v-for="(원룸, i) in 원룸들" :key="i">
-    <img :src="원룸.image" class="room-img">
-    <h4 @click="모달창열렸니 = true; 누른거 = i">{{ 원룸.title }}</h4>
-    <p>{{ 원룸.price }}원</p>
-  </div>
+  <Card @openModal="모달창열렸니=true; 누른거=i" :원룸="원룸" v-for="(원룸, i) in 원룸들" :key="i" />
 </template>
 
 <script>
@@ -25,6 +19,7 @@
 import data from './oneroom';
 import Discount from './components/Discount';
 import Modal from './components/Modal';
+import Card from './components/Card';
 
 export default {
   name: 'App',
@@ -43,6 +38,7 @@ export default {
   components: {
     Discount,
     Modal,
+    Card,
   }
 }
 </script>
