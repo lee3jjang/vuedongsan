@@ -1,21 +1,21 @@
 <template>
 
-  <div class="black-bg" v-if="모달창열렸니">
-    <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
-      <button @click="모달창열렸니 = false">닫기</button>
-    </div>
-  </div>
-
+  <!-- 메뉴 -->
   <div class="menu">
-    <a v-for="a in 메뉴들" :key="a">{{ a }}</a>
-  </div>
+        <a v-for="a in 메뉴들" :key="a">{{ a }}</a>
+    </div>
 
+  <Discount/>
+
+  <!-- 모달창 -->
+  <Modal/>
+
+
+  <!-- 로고 및 내용 -->
   <img alt="Vue logo" src="./assets/logo.png">
-  <div v-for="원룸 in 원룸들" :key="원룸">
+  <div v-for="(원룸, i) in 원룸들" :key="i">
     <img :src="원룸.image" class="room-img">
-    <h4>{{ 원룸.title }}</h4>
+    <h4 @click="모달창열렸니 = true; 누른거 = i">{{ 원룸.title }}</h4>
     <p>{{ 원룸.price }}원</p>
   </div>
 </template>
@@ -23,11 +23,14 @@
 <script>
 
 import data from './oneroom';
+import Discount from './components/Discount';
+import Modal from './components/Modal';
 
 export default {
   name: 'App',
   data(){
     return {
+      누른거 : 0,
       원룸들: data,
       모달창열렸니: false,
       신고수 : [0, 0, 0],
@@ -38,6 +41,8 @@ export default {
   methods: {
   },
   components: {
+    Discount,
+    Modal,
   }
 }
 </script>
@@ -49,6 +54,13 @@ body {
 
 div {
   box-sizing: border-box;
+}
+
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 .black-bg {
