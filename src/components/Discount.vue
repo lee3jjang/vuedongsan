@@ -1,12 +1,15 @@
 <template>
     <div class="discount">
-        <h4>지금 결제하면 20% 할인</h4>
+        <h4>지금 결제하면 {{ 할인율 }}% 할인</h4>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Discount'
+    name: 'Discount',
+    props: {
+        할인율: Number
+    }
 }
 </script>
 
